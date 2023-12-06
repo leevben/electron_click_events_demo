@@ -2,7 +2,6 @@
 const { app, BrowserWindow, screen } = require('electron');
 const path = require('node:path');
 
-let { height: screenHeight, width: screenWidth } = screen.getPrimaryDisplay().size;
 
 function createWindow() {
   // Create the browser window.
@@ -24,6 +23,8 @@ function createWindow() {
   mainWindow.webContents.openDevTools();
 
   mainWindow.webContents.setWindowOpenHandler((options) => {
+    let { height: screenHeight, width: screenWidth } = screen.getPrimaryDisplay().size;
+
     return {
       action: 'allow',
       overrideBrowserWindowOptions: {
