@@ -1,7 +1,6 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, screen } = require('electron');
 const path = require('node:path');
-const { screen } = require('electron');
 
 let { height: screenHeight, width: screenWidth } = screen.getPrimaryDisplay().size;
 
