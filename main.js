@@ -26,7 +26,7 @@ function createWindow() {
       action: 'allow',
       overrideBrowserWindowOptions: {
         parent: mainWindow,
-        fullscreen: false,
+        fullscreen: true,
         frame: false,
         transparent: true,
         minimizable: false,
