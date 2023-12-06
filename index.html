@@ -21,9 +21,9 @@
   </head>
 
   <body>
-    <button id="btn">打开帮助中心</button>
+    <button id="btn">open new window</button>
 
-    <button id="btn2">Test</button>
+    <button id="btn2">click me</button>
     <script>
       const btn = document.getElementById('btn');
       btn.addEventListener('click', async () => {
@@ -33,10 +33,10 @@
       btn2.addEventListener('click', () => {
         console.log('test');
       });
-      btn2.addEventListener('mouseDown', () => {
+      btn2.addEventListener('mousedown', () => {
         console.log('mouseDown');
       });
-      btn2.addEventListener('touchStart', () => {
+      btn2.addEventListener('touchstart', () => {
         console.log('touchStart');
       });
     </script>
