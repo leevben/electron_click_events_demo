@@ -1,6 +1,9 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, screen } = require('electron');
 const path = require('node:path');
+const { screen } = require('electron');
+
+let { height: screenHeight, width: screenWidth } = screen.getPrimaryDisplay().size;
 
 function createWindow() {
   // Create the browser window.
@@ -34,8 +37,8 @@ function createWindow() {
         maximizable: false,
         center: true,
         skipTaskbar: true,
-        width: 100,
-        height: 100,
+        width: screenWidth,
+        height: screenHeight,
         movable: false,
         alwaysOnTop: true,
       },
