@@ -5,9 +5,9 @@ const path = require('node:path');
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    // width: 800,
-    // height: 600,
-    fullscreen: true,
+    width: 800,
+    height: 600,
+    fullscreen: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
@@ -20,6 +20,35 @@ function createWindow() {
 
   // Open the DevTools.
   mainWindow.webContents.openDevTools();
+
+  mainWindow.webContents.setWindowOpenHandler((options) => {
+    if (options.frameName.startsWith('child_win')) {
+      return {
+        action: 'allow',
+        overrideBrowserWindowOptions: {
+          parent: mainWindow,
+          fullscreen: true,
+          frame: false,
+          transparent: true,
+          minimizable: false,
+          resizable: false,
+          maximizable: false,
+          center: true,
+          skipTaskbar: true,
+          width: 100,
+          height: 100,
+          movable: false,
+          alwaysOnTop: true
+        }
+      };
+    }
+    return { action: 'deny' };
+  });
+  mainWindow.webContents.on('did-create-window', (newWin) => {
+    newWin.setIgnoreMouseEvents(true);
+    newWin.setAlwaysOnTop(true, 'pop-up-menu');
+  });
+  
 }
 
 // This method will be called when Electron has finished
@@ -42,30 +71,4 @@ app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit();
 });
 
-app.webContents.setWindowOpenHandler((options) => {
-  if (options.frameName.startsWith('child_win')) {
-    return {
-      action: 'allow',
-      overrideBrowserWindowOptions: {
-        parent: app,
-        fullscreen: true,
-        frame: false,
-        transparent: true,
-        minimizable: false,
-        resizable: false,
-        maximizable: false,
-        center: true,
-        skipTaskbar: true,
-        width: 100,
-        height: 100,
-        movable: false,
-        alwaysOnTop: true
-      }
-    };
-  }
-  return { action: 'deny' };
-});
-win.webContents.on('did-create-window', (newWin) => {
-  newWin.setIgnoreMouseEvents(true);
-  newWin.setAlwaysOnTop(true, 'pop-up-menu');
-});
+
