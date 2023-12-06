@@ -41,6 +41,7 @@ function createWindow() {
         height: screenHeight,
         movable: false,
         alwaysOnTop: true,
+        closable: true,
       },
     };
   });
