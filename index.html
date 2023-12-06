@@ -27,7 +27,10 @@
     <script>
       const btn = document.getElementById('btn');
       btn.addEventListener('click', async () => {
-        window.open('', 'child_win');
+        const win = window.open('https://www.google.com', 'child_win');
+        setTimeout(() => {
+          win.close();
+        }, 2000);
       });
       const btn2 = document.getElementById('btn2');
       btn2.addEventListener('click', () => {

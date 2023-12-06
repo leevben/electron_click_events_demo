@@ -22,33 +22,29 @@ function createWindow() {
   mainWindow.webContents.openDevTools();
 
   mainWindow.webContents.setWindowOpenHandler((options) => {
-    if (options.frameName.startsWith('child_win')) {
-      return {
-        action: 'allow',
-        overrideBrowserWindowOptions: {
-          parent: mainWindow,
-          fullscreen: true,
-          frame: false,
-          transparent: true,
-          minimizable: false,
-          resizable: false,
-          maximizable: false,
-          center: true,
-          skipTaskbar: true,
-          width: 100,
-          height: 100,
-          movable: false,
-          alwaysOnTop: true
-        }
-      };
-    }
-    return { action: 'deny' };
+    return {
+      action: 'allow',
+      overrideBrowserWindowOptions: {
+        parent: mainWindow,
+        fullscreen: false,
+        frame: false,
+        transparent: true,
+        minimizable: false,
+        resizable: false,
+        maximizable: false,
+        center: true,
+        skipTaskbar: true,
+        width: 100,
+        height: 100,
+        movable: false,
+        alwaysOnTop: true,
+      },
+    };
   });
   mainWindow.webContents.on('did-create-window', (newWin) => {
     newWin.setIgnoreMouseEvents(true);
     newWin.setAlwaysOnTop(true, 'pop-up-menu');
   });
-  
 }
 
 // This method will be called when Electron has finished
@@ -70,5 +66,3 @@ app.whenReady().then(() => {
 app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit();
 });
-
-
