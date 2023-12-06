@@ -9,8 +9,8 @@ const electron = require('electron');
 
 console.log(electron);
 
-const openNewWindow = () => {
+const openApp = () => {
   electron.ipcRenderer.send('open');
 };
 
-electron.contextBridge.exposeInMainWorld('openNewWindow', openNewWindow);
+electron.contextBridge.exposeInMainWorld('openApp', openApp);

@@ -21,24 +21,14 @@
   </head>
 
   <body>
-    <button id="btn">open new window</button>
+    <button id="btn">open window</button>
 
-    <button id="btn2">click me</button>
+    <button id="btn2">Test</button>
     <script>
       const btn = document.getElementById('btn');
       btn.addEventListener('click', async () => {
-        const win = window.open('', 'child_win');
-        // 创建一个div 背景rgba(0,0,0,0.5) 宽高100vw 100vh
-        const div = document.createElement('div');
-        div.style.width = '100ox';
-        div.style.height = '100ox';
-        div.style.backgroundColor = 'rgba(0,0,0,0.5)';
-        win.document.body.appendChild(div);
-        console.log('btn.addEventListener  win:', win);
-        setTimeout(() => {
-          console.log('setTimeout  win:', win);
-          win.close();
-        }, 2000);
+        console.log('click');
+        await window.openApp();
       });
       const btn2 = document.getElementById('btn2');
       btn2.addEventListener('click', () => {
