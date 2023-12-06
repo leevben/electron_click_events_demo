@@ -28,7 +28,15 @@
       const btn = document.getElementById('btn');
       btn.addEventListener('click', async () => {
         const win = window.open('', 'child_win');
+        // 创建一个div 背景rgba(0,0,0,0.5) 宽高100vw 100vh
+        const div = document.createElement('div');
+        div.style.width = '100ox';
+        div.style.height = '100ox';
+        div.style.backgroundColor = 'rgba(0,0,0,0.5)';
+        win.document.body.appendChild(div);
+        console.log('btn.addEventListener  win:', win);
         setTimeout(() => {
+          console.log('setTimeout  win:', win);
           win.close();
         }, 2000);
       });
