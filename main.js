@@ -42,22 +42,30 @@ app.on('window-all-closed', function () {
   if (process.platform !== 'darwin') app.quit();
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
-ipcMain.on('open', () => {
-  console.log('open');
-  const win = new BrowserWindow({
-    transparent: true,
-    fullscreen: true,
-    resizable: false,
-    width: 300,
-    height: 300,
-    closable: true,
-    alwaysOnTop: true,
-  });
-  win.loadURL('https://www.google.com');
-  win.addListener('ready-to-show', () => {
-    win.show();
-  });
-  return win;
+app.webContents.setWindowOpenHandler((options) => {
+  if (options.frameName.startsWith('child_win')) {
+    return {
+      action: 'allow',
+      overrideBrowserWindowOptions: {
+        parent: app,
+        fullscreen: true,
+        frame: false,
+        transparent: true,
+        minimizable: false,
+        resizable: false,
+        maximizable: false,
+        center: true,
+        skipTaskbar: true,
+        width: 100,
+        height: 100,
+        movable: false,
+        alwaysOnTop: true
+      }
+    };
+  }
+  return { action: 'deny' };
+});
+win.webContents.on('did-create-window', (newWin) => {
+  newWin.setIgnoreMouseEvents(true);
+  newWin.setAlwaysOnTop(true, 'pop-up-menu');
 });
