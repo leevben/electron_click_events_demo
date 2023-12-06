@@ -48,12 +48,12 @@ ipcMain.on('open', () => {
   console.log('open');
   const win = new BrowserWindow({
     transparent: true,
-    maximizable: false,
-    center: true,
-    fullscreen: false,
+    fullscreen: true,
+    resizable: false,
     width: 300,
     height: 300,
     closable: true,
+    alwaysOnTop: true,
   });
   win.loadURL('https://www.google.com');
   win.addListener('ready-to-show', () => {
